@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:33:39 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/07 14:30:51 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:12:00 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,25 @@ void	read_map(t_data *data)
 	close(fd);
 }
 
+static void	put_image_to_window(t_data *data, int i, int j, char tile)
+{
+	void	*img;
+
+	if (tile == '0')
+		img = data->floor;
+	else if (tile == '1')
+		img = data->wall;
+	else if (tile == 'E')
+		img = data->exit;
+	else if (tile == 'P')
+		img = data->ichigo;
+	else if (tile == 'C')
+		img = data->soul;
+	else
+		return ;
+	mlx_put_image_to_window(data->mlx, data->window, img, j * 72, i * 72);
+}
+
 void	load_map(t_data *data)
 {
 	int	i;
@@ -51,16 +70,7 @@ void	load_map(t_data *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (data->map[i][j] == '0')
-				mlx_put_image_to_window(data->mlx, data->window, data->floor, j * 72, i * 72);
-			else if (data->map[i][j] == '1')
-				mlx_put_image_to_window(data->mlx, data->window, data->wall, j * 72, i * 72);
-			else if (data->map[i][j] == 'E')
-				mlx_put_image_to_window(data->mlx, data->window, data->exit, j * 72, i * 72);
-			else if (data->map[i][j] == 'P')
-				mlx_put_image_to_window(data->mlx, data->window, data->ichigo, j * 72, i * 72);
-			else if (data->map[i][j] == 'C')
-				mlx_put_image_to_window(data->mlx, data->window, data->soul, j * 72, i * 72);
+			put_image_to_window(data, i, j, data->map[i][j]);
 			j++;
 		}
 		i++;

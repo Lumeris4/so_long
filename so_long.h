@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:06:29 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/07 15:22:12 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/08 14:29:44 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,8 @@ void	move_with_s(t_data *data);
 void	move_with_a(t_data *data);
 void	move_with_d(t_data *data);
 int     handle_close(t_data *data);
+bool	check_right_number(t_data *data);
+bool	check_all(t_data *data);
+bool	check_len(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 14:52:55 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/07 16:34:32 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:00:41 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	move_with_w(t_data *data)
 {
-	if (data->map[data->y_map - 1][data->x_map] != 'E')
+	if (data->map[data->y_map - 1][data->x_map] != 'E'
+		|| (data->map[data->y_map - 1][data->x_map] == 'E'
+		&& data->nb_soul <= 0))
 	{
 		mlx_put_image_to_window(data->mlx, data->window,
 			data->floor, data->x, data->y);
@@ -29,18 +31,19 @@ void	move_with_w(t_data *data)
 		data->map[data->y_map][data->x_map] = '0';
 		data->nb_soul--;
 	}
-	else if (data->map[data->y_map - 1][data->x_map] == 'E'
+	else if (data->map[data->y_map][data->x_map] == 'E'
 			&& data->nb_soul <= 0)
 	{
-		data->step++;
-		ft_printf("You Win with %d step !\n", data->step++);
+		ft_printf("You Win with %d step !\n", data->step);
 		handle_close(data);
 	}
 }
 
 void	move_with_s(t_data *data)
 {
-	if (data->map[data->y_map + 1][data->x_map] != 'E')
+	if (data->map[data->y_map + 1][data->x_map] != 'E'
+		|| (data->map[data->y_map + 1][data->x_map] == 'E'
+		&& data->nb_soul <= 0))
 	{
 		mlx_put_image_to_window(data->mlx, data->window,
 			data->floor, data->x, data->y);
@@ -55,18 +58,19 @@ void	move_with_s(t_data *data)
 		data->map[data->y_map][data->x_map] = '0';
 		data->nb_soul--;
 	}
-	else if (data->map[data->y_map + 1][data->x_map] == 'E'
+	if (data->map[data->y_map][data->x_map] == 'E'
 		&& data->nb_soul <= 0)
 	{
-		data->step++;
-		ft_printf("You Win with %d step !\n", data->step++);
+		ft_printf("You Win with %d step !\n", data->step);
 		handle_close(data);
 	}
 }
 
 void	move_with_a(t_data *data)
 {
-	if (data->map[data->y_map][data->x_map - 1] != 'E')
+	if (data->map[data->y_map][data->x_map - 1] != 'E'
+		|| (data->map[data->y_map][data->x_map - 1] == 'E'
+		&& data->nb_soul <= 0))
 	{
 		mlx_put_image_to_window(data->mlx, data->window,
 			data->floor, data->x, data->y);
@@ -81,10 +85,9 @@ void	move_with_a(t_data *data)
 		data->map[data->y_map][data->x_map] = '0';
 		data->nb_soul--;
 	}
-	else if (data->map[data->y_map][data->x_map - 1] == 'E'
+	if (data->map[data->y_map][data->x_map] == 'E'
 		&& data->nb_soul <= 0)
 	{
-		data->step++;
 		ft_printf("You Win with %d step !\n", data->step);
 		handle_close(data);
 	}
@@ -92,7 +95,9 @@ void	move_with_a(t_data *data)
 
 void	move_with_d(t_data *data)
 {
-	if (data->map[data->y_map][data->x_map + 1] != 'E')
+	if (data->map[data->y_map][data->x_map + 1] != 'E'
+		|| (data->map[data->y_map][data->x_map + 1] == 'E'
+		&& data->nb_soul <= 0))
 	{
 		mlx_put_image_to_window(data->mlx, data->window,
 			data->floor, data->x, data->y);
@@ -107,11 +112,10 @@ void	move_with_d(t_data *data)
 		data->map[data->y_map][data->x_map] = '0';
 		data->nb_soul--;
 	}
-	else if (data->map[data->y_map][data->x_map + 1] == 'E'
+	if (data->map[data->y_map][data->x_map] == 'E'
 		&& data->nb_soul <= 0)
 	{
-		data->step++;
-		ft_printf("You Win with %d step !\n", data->step++);
+		ft_printf("You Win with %d step !\n", data->step);
 		handle_close(data);
 	}
 }

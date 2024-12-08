@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:01:47 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/07 16:19:24 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/08 14:58:54 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	handle_close(t_data *data)
 	mlx_destroy_window(data->mlx, data->window);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
+	for_free(data);
 	exit(0);
 	return (0);
 }
@@ -74,6 +75,12 @@ int	main(int argc, char **argv)
 	}
 	data.name_map = argv[1];
 	read_map(&data);
+	if (!check_all(&data))
+	{
+		ft_putstr_fd("Error\n", 2);
+		for_free(&data);
+		return (0);
+	}
 	data.mlx = mlx_init();
 	init_image(&data);
 	load_map(&data);
@@ -81,6 +88,5 @@ int	main(int argc, char **argv)
 	mlx_key_hook(data.window, handle_key, &data);
 	mlx_hook(data.window, 17, 0, handle_close, &data);
 	mlx_loop(data.mlx);
-	for_free(&data);
 	return (0);
 }
