@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:41:36 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/06 08:51:01 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:55:56 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ char	*get_next_line(int fd)
 	return (NULL);
 }
 
-
 // #include <fcntl.h>
 // #include <stdio.h>
 // int main()
@@ -122,6 +121,4 @@ char	*get_next_line(int fd)
 // 	}
 // 	free(result);
 // 	close(fd);
-
 // }
-

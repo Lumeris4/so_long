@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:36:53 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/07 16:18:39 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:51:12 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,66 @@ void	count_soul(t_data *data)
 		y++;
 	}
 	find_p(data);
+}
+
+bool	check_c_or_e(char **map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'C' || map[y][x] == 'E')
+				return (false);
+			x++;
+		}
+		y++;
+	}
+	return (true);
+}
+
+static char	*ft_strcpy(char *dst, const char *src)
+{
+	size_t	i;
+
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	**ft_strdup_matrice(char **s)
+{
+	char	**result;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	result = malloc(sizeof(char *) * (ft_strlen_matrice(s) + 1));
+	if (!result)
+		return (NULL);
+	while (s[i])
+	{
+		j = 0;
+		result[i] = malloc(sizeof(char) * (ft_strlen(s[i]) + 1));
+		if (!result[i])
+		{
+			while (i > 0)
+				free(result[--i]);
+			free(result);
+			return (NULL);
+		}
+		ft_strcpy(result[i], s[i]);
+		i++;
+	}
+	result[i] = NULL;
+	return (result);
 }

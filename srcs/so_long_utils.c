@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:33:39 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/08 15:12:00 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/09 09:59:17 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	read_map(t_data *data)
 	buffer[bytes_read] = '\0';
 	data->map = ft_split(buffer, '\n');
 	close(fd);
+	data->y_max = ft_strlen_matrice(data->map) - 1;
+	data->x_max = ft_strlen(data->map[0]) - 1;
 }
 
 static void	put_image_to_window(t_data *data, int i, int j, char tile)
