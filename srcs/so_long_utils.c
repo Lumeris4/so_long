@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:33:39 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/09 09:59:17 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:31:45 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	for_free(t_data *data)
 	free(data->map);
 }
 
-void	read_map(t_data *data)
+int	read_map(t_data *data)
 {
 	int		fd;
 	ssize_t	bytes_read;
@@ -33,13 +33,14 @@ void	read_map(t_data *data)
 
 	fd = open(data->name_map, O_RDONLY);
 	if (fd < 0)
-		return ;
+		return (0);
 	bytes_read = read(fd, buffer, 1024);
 	buffer[bytes_read] = '\0';
 	data->map = ft_split(buffer, '\n');
 	close(fd);
 	data->y_max = ft_strlen_matrice(data->map) - 1;
 	data->x_max = ft_strlen(data->map[0]) - 1;
+	return (1);
 }
 
 static void	put_image_to_window(t_data *data, int i, int j, char tile)

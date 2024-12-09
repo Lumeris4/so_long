@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 14:13:56 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/09 10:51:26 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:27:26 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,32 +57,39 @@ static bool	check_borders_left_right(t_data *data)
 	return (true);
 }
 
-static void	flood_fill(char **map, int x, int y, t_data *data)
+static void	flood_fill(char **map, int x, int y, int *valid)
 {
-	if (x < 0 || y < 0 || x >= data->x_max || y >= data->y_max)
+	if (y < 0 || !map || !map[y] || x < 0 || x >= (int)ft_strlen(map[y]))
 		return ;
 	if (map[y][x] == '1' || map[y][x] == 'V')
 		return ;
+	if (map[y][x] == 'E')
+	{
+		(*valid)--;
+		return ;
+	}
+	if (map[y][x] == 'C')
+		(*valid)--;
 	map[y][x] = 'V';
-	flood_fill(map, x + 1, y, data);
-	flood_fill(map, x - 1, y, data);
-	flood_fill(map, x, y + 1, data);
-	flood_fill(map, x, y - 1, data);
+	flood_fill(map, x + 1, y, valid);
+	flood_fill(map, x - 1, y, valid);
+	flood_fill(map, x, y + 1, valid);
+	flood_fill(map, x, y - 1, valid);
 }
 
 static bool	check_path(t_data *data)
 {
 	int		x;
 	int		y;
-	bool	result;
 	char	**copy;
+	int		valid;
 
 	copy = ft_strdup_matrice(data->map);
 	count_soul(data);
 	x = data->x_map;
 	y = data->y_map;
-	flood_fill(copy, x, y, data);
-	result = check_c_or_e(copy);
+	valid = data->nb_soul + 1;
+	flood_fill(copy, x, y, &valid);
 	y = 0;
 	while (copy[y])
 	{
@@ -90,12 +97,14 @@ static bool	check_path(t_data *data)
 		y++;
 	}
 	free(copy);
-	return (result);
+	if (valid <= 0)
+		return (true);
+	return (false);
 }
 
-bool	check_all(t_data *data)
+bool	check_all(t_data *data, char *argv)
 {
-	if (!check_len(data) || !check_letter(data)
+	if (!ber(argv) || !check_len(data) || !check_letter(data)
 		|| !check_right_number(data) || !check_borders_up_down(data)
 		|| !check_borders_left_right(data) || !check_path(data))
 		return (false);

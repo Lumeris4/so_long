@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:36:53 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/09 10:51:12 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:11:17 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	count_soul(t_data *data)
 	int	y;
 
 	y = 0;
+	data->nb_soul = 0;
 	while (data->map[y])
 	{
 		x = 0;

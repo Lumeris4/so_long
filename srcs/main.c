@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:01:47 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/09 10:21:36 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:23:34 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,15 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf("Correct synthax: ./so_long [path_map]\n");
+		ft_printf("Error\nCorrect synthax: ./so_long [path_map]\n");
 		return (1);
 	}
 	data.name_map = argv[1];
-	read_map(&data);
-	if (!check_all(&data))
+	if (!read_map(&data))
+		return (write(2, "Error\nMap can't be open", 24));
+	if (!check_all(&data, argv[1]))
 	{
-		ft_putstr_fd("Map Error\n", 2);
+		ft_putstr_fd("Error\nMap Error\n", 2);
 		for_free(&data);
 		return (1);
 	}

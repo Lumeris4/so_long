@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:45:29 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/08 15:05:39 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:28:37 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ bool	check_len(t_data *data)
 			return (false);
 		i++;
 	}
-	if ((size_t)len_matrice == len)
-		return (false);
 	return (true);
 }
 

@@ -1,7 +1,7 @@
 NAME = so_long
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -I./minilibx-linux -L./minilibx-linux -lmlx -lXext -lX11 -lm
-SRCS = srcs/main.c srcs/so_long_utils.c srcs/errors.c srcs/positions.c srcs/shifting.c srcs/errors2.c
+SRCS = srcs/main.c srcs/so_long_utils.c srcs/errors.c srcs/positions.c srcs/shifting.c srcs/errors2.c srcs/errors3.c
 
 LIBFTDIR = libft
 LIBFT = $(LIBFTDIR)/libft.a
