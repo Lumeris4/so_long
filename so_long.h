@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:06:29 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/09 14:46:33 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:07:28 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ bool	check_len(t_data *data);
 bool	check_c_or_e(char **map);
 bool	ber(char *argv);
 char	**ft_strdup_matrice(char **s);
+bool	len_screen(t_data *data);
 
 #endif

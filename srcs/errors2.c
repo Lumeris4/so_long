@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 14:13:56 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/09 15:27:26 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:23:18 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,25 @@ static bool	check_path(t_data *data)
 
 bool	check_all(t_data *data, char *argv)
 {
-	if (!ber(argv) || !check_len(data) || !check_letter(data)
-		|| !check_right_number(data) || !check_borders_up_down(data)
-		|| !check_borders_left_right(data) || !check_path(data))
+	if (!ber(argv)
+		|| !check_len(data) || !len_screen(data)
+		|| !check_letter(data) || !check_right_number(data)
+		|| !check_borders_up_down(data) || !check_borders_left_right(data)
+		|| !check_path(data))
+	{
+		ft_putstr_fd("Error\n", 2);
+		if (!ber(argv))
+			ft_putstr_fd("Map must be a .ber\n", 2);
+		else if (!check_len(data) || !len_screen(data))
+			ft_putstr_fd("Wrong map len\n", 2);
+		else if (!check_letter(data) || !check_right_number(data))
+			ft_putstr_fd("Map haven't right elements\n", 2);
+		else if (!check_borders_up_down(data)
+			|| !check_borders_left_right(data))
+			ft_putstr_fd("Map must be surrounded by wall\n", 2);
+		else if (!check_path(data))
+			ft_putstr_fd("Map not playable\n", 2);
 		return (false);
+	}
 	return (true);
 }

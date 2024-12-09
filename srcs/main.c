@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:01:47 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/09 15:23:34 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:59:17 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	main(int argc, char **argv)
 		return (write(2, "Error\nMap can't be open", 24));
 	if (!check_all(&data, argv[1]))
 	{
-		ft_putstr_fd("Error\nMap Error\n", 2);
 		for_free(&data);
 		return (1);
 	}
