@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 14:13:56 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/09 16:23:18 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:01:33 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,8 @@ static void	flood_fill(char **map, int x, int y, int *valid)
 {
 	if (y < 0 || !map || !map[y] || x < 0 || x >= (int)ft_strlen(map[y]))
 		return ;
-	if (map[y][x] == '1' || map[y][x] == 'V')
+	if (map[y][x] == '1' || map[y][x] == 'V' || map[y][x] == 'E')
 		return ;
-	if (map[y][x] == 'E')
-	{
-		(*valid)--;
-		return ;
-	}
 	if (map[y][x] == 'C')
 		(*valid)--;
 	map[y][x] = 'V';
@@ -88,7 +83,7 @@ static bool	check_path(t_data *data)
 	count_soul(data);
 	x = data->x_map;
 	y = data->y_map;
-	valid = data->nb_soul + 1;
+	valid = data->nb_soul;
 	flood_fill(copy, x, y, &valid);
 	y = 0;
 	while (copy[y])
