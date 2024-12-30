@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:45:29 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/09 14:28:37 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/30 14:20:49 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,9 @@ bool	check_letter(t_data *data)
 bool	check_len(t_data *data)
 {
 	size_t	len;
-	int		len_matrice;
 	int		i;
 
 	i = 1;
-	len_matrice = ft_strlen_matrice(data->map);
 	len = ft_strlen(data->map[0]);
 	while (data->map[i])
 	{

@@ -6,11 +6,11 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 14:13:56 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/11 11:01:33 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/30 14:33:41 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 static bool	check_borders_up_down(t_data *data)
 {
@@ -57,23 +57,29 @@ static bool	check_borders_left_right(t_data *data)
 	return (true);
 }
 
-static void	flood_fill(char **map, int x, int y, int *valid)
+static void	flood_fill(char **map, int x, int y, t_flood *flood)
 {
 	if (y < 0 || !map || !map[y] || x < 0 || x >= (int)ft_strlen(map[y]))
 		return ;
-	if (map[y][x] == '1' || map[y][x] == 'V' || map[y][x] == 'E')
-	{
-		if (map[y][x] == 'E')
-			(*valid)--;
+	if (map[y][x] == '1' || map[y][x] == 'V')
 		return ;
+	if (map[y][x] == 'E')
+	{
+		if (flood->has_collectible > 0)
+			return ;
+		else
+			flood->valid--;
 	}
 	if (map[y][x] == 'C')
-		(*valid)--;
+	{
+		flood->valid--;
+		flood->has_collectible--;
+	}
 	map[y][x] = 'V';
-	flood_fill(map, x + 1, y, valid);
-	flood_fill(map, x - 1, y, valid);
-	flood_fill(map, x, y + 1, valid);
-	flood_fill(map, x, y - 1, valid);
+	flood_fill(map, x + 1, y, flood);
+	flood_fill(map, x - 1, y, flood);
+	flood_fill(map, x, y + 1, flood);
+	flood_fill(map, x, y - 1, flood);
 }
 
 static bool	check_path(t_data *data)
@@ -81,14 +87,15 @@ static bool	check_path(t_data *data)
 	int		x;
 	int		y;
 	char	**copy;
-	int		valid;
+	t_flood	flood;
 
 	copy = ft_strdup_matrice(data->map);
 	count_soul(data);
 	x = data->x_map;
 	y = data->y_map;
-	valid = data->nb_soul + 1;
-	flood_fill(copy, x, y, &valid);
+	flood.valid = data->nb_soul + 1;
+	flood.has_collectible = data->nb_soul;
+	flood_fill(copy, x, y, &flood);
 	y = 0;
 	while (copy[y])
 	{
@@ -96,7 +103,7 @@ static bool	check_path(t_data *data)
 		y++;
 	}
 	free(copy);
-	if (valid <= 0)
+	if (flood.valid <= 0)
 		return (true);
 	return (false);
 }

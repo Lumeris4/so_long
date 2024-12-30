@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:36:53 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/09 15:11:17 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/30 14:20:10 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ char	**ft_strdup_matrice(char **s)
 {
 	char	**result;
 	size_t	i;
-	size_t	j;
 
 	i = 0;
 	result = malloc(sizeof(char *) * (ft_strlen_matrice(s) + 1));
@@ -104,7 +103,6 @@ char	**ft_strdup_matrice(char **s)
 		return (NULL);
 	while (s[i])
 	{
-		j = 0;
 		result[i] = malloc(sizeof(char) * (ft_strlen(s[i]) + 1));
 		if (!result[i])
 		{

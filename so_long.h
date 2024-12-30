@@ -6,7 +6,7 @@
 /*   By: lelanglo <lelanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:06:29 by lelanglo          #+#    #+#             */
-/*   Updated: 2024/12/09 16:07:28 by lelanglo         ###   ########.fr       */
+/*   Updated: 2024/12/30 14:33:19 by lelanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 # include <stdbool.h>
+
+typedef struct s_flood
+{
+	int	valid;
+	int	has_collectible;
+}	t_flood;
 
 typedef struct s_data
 {
